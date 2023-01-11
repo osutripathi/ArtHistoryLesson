@@ -14,6 +14,7 @@ if "data" in query_result.keys() and len(query_result["data"]) > 0:
         image_query = dict(image_query.json())
         image_url = f"{image_query['config']['iiif_url']}/{image_query['data']['image_id']}/full/843,/0/default.jpg"
 
+        HTML_DOCSTRING += f"<div><p>Artwork Title: {image_query['data']['title']}</p><p>Artist: {image_query['data']['artist_title']}</p>"
         HTML_DOCSTRING += f"<img src={image_url} width=200 height=200 /><br>"
 else:
     HTML_DOCSTRING += "<h1>No Artworks Found</h1>"
