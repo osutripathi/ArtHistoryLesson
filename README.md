@@ -5,5 +5,5 @@ Python3. Make sure your python installation has the default package manager pip 
 
 ## How To Run
 Clone the repo with `git clone https://github.com/osutripathi/ArtHistoryLesson.git`  
-Install required packages with `pip install -r requirements.txt`
+Install required packages with `pip install -r requirements.txt`  
 Run with `python3 script.py`
