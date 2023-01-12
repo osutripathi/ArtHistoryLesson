@@ -40,7 +40,7 @@ selected_queries = [random.choice(list(queries.keys())) for q in range(10)]
 print("Loading different artworks...")
 images = []
 for query in progressBar(selected_queries, prefix = "Progress", suffix = "Complete", length = 50):
-    query_result = requests.get("https://api.artic.edu/api/v1/artworks/search", params = {"q": query, "page": random.randint(1, queries[query])})
+    query_result = requests.get("https://api.artic.edu/api/v1/artworks/search", params = {"q": query + ", painting", "page": random.randint(1, queries[query])})
     query_result = dict(query_result.json())    #Convert JSON from request into a workable dictionary (Python version of hashmap)
 
     image_id = query_result["data"][random.randint(0, len(query_result["data"]) - 1)]["id"]
