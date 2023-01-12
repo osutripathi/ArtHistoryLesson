@@ -48,11 +48,27 @@ for query in progressBar(selected_queries, prefix = "Progress", suffix = "Comple
     image_query = dict(requests.get(image_query_url).json())
     image_url = f"{image_query['config']['iiif_url']}/{image_query['data']['image_id']}/full/843,/0/default.jpg"
 
-    images.append((query, image_url))
+    images.append((query, image_query["data"]["title"], image_query["data"]["artist_title"], image_url))
 
-with open("assets\image_urls.txt", "wt") as output_file:
+
+with open("web-ui\index1.html", "rt") as input_file:
+    html_prefix = input_file.readlines()
+with open("web-ui\index2.html", "rt") as input_file:
+    html_suffix = input_file.readlines()
+with open("index.html", "wt") as output_file:
+    for line in html_prefix:
+        output_file.write(line)
+    output_file.write("\n")
     for image in images:
-        output_file.write(f"{image[0]}\n{image[1]}\n\n")
+        html_docstring = f"<div class='slideshow-images' artMovement='{image[0]}' "
+        art_title = image[1].replace("'", '"')
+        html_docstring += f"artTitle='{art_title}' "
+        html_docstring += f'artist="{image[2]}">'
+        html_docstring += f"<img src='{image[3]}'></div>"
+        output_file.write(html_docstring + "\n")
+    for line in html_suffix:
+        output_file.write(line)
+
 
 print("Opening browser...")
-webbrowser.open("web-ui\index.html")
+webbrowser.open("index.html")
